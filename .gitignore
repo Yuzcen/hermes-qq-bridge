@@ -1,0 +1,41 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Runtime data
+logs/
+files/
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+
+# Local backups
+*.bak
+*.backup
+*.bak-*
+*.backup-*
+
+# Temporary exports and private data
+exports/
+private/
+*.xlsx
+*.xls
+*.csv
