@@ -39,7 +39,8 @@ QQ_GROUP_WHITELIST = {
 QQ_ALLOWED_USERS = {
     int(x.strip()) for x in os.environ.get("QQ_ALLOWED_USERS", "").split(",") if x.strip()
 }
-FILE_DIR = Path(os.environ.get("QQ_BRIDGE_FILE_DIR", "/tmp/hermes-qq-bridge-files"))
+PROJECT_DIR = Path(__file__).resolve().parent.parent
+FILE_DIR = Path(os.environ.get("QQ_BRIDGE_FILE_DIR", str(PROJECT_DIR / "runtime" / "files")))
 FILE_DIR.mkdir(parents=True, exist_ok=True)
 
 # 附件处理：单条消息最多落盘几个附件
@@ -78,7 +79,7 @@ GROUP_BUSY_REPLY = os.environ.get("QQ_GROUP_BUSY_REPLY", "正忙着呢，活儿�
 # ---------------------------------------------------------------------------
 # 日志（脱敏：不记录消息正文，只记阶段/群号/消息ID/耗时/错误类型）
 # ---------------------------------------------------------------------------
-LOG_DIR = Path(os.environ.get("QQ_BRIDGE_LOG_DIR", "/home/johntime/hermes-qq-bridge/logs"))
+LOG_DIR = Path(os.environ.get("QQ_BRIDGE_LOG_DIR", str(PROJECT_DIR / "runtime" / "logs")))
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 logger = logging.getLogger("qq_bridge")
 logger.setLevel(logging.INFO)

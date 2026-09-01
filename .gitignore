@@ -6,6 +6,10 @@
 # Runtime data
 logs/
 files/
+runtime/files/
+runtime/logs/
+runtime/*.jsonl
+runtime/*.db
 *.db
 *.sqlite
 *.sqlite3

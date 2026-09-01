@@ -14,7 +14,7 @@
 
 当前已经存在：
 
-- 实际运行 profile：`/home/johntime/.hermes/profiles/qq-group/`
+- 实际运行 profile：`<HERMES_PROFILE_DIR>/qq-group/`
 - 核心人设：`SOUL.md`
 - 群级提示：`config.yaml` 的 `channel_overrides`
 - 原始状态：`state.db`
@@ -23,7 +23,7 @@
 - 完整审计：`media_archive/ITERATION_LOG.md`
 - 每小时 watchdog
 - 每 6 小时自主迭代
-- 独立开源仓库：`/home/johntime/hermes-qq-bridge/`
+- 独立开源仓库：`<BRIDGE_DIR>/`
 
 不可违反：
 
@@ -49,15 +49,15 @@
 **Objective:** 让后续画像开发与现网可洛喵运行代码分离，可回滚、可开源审查。
 
 **Files:**
-- Modify: `/home/johntime/hermes-qq-bridge/` Git repository only
-- Read-only reference: `/home/johntime/.hermes/profiles/qq-group/`
+- Modify: `<BRIDGE_DIR>/` Git repository only
+- Read-only reference: `<HERMES_PROFILE_DIR>/qq-group/`
 
 **Steps:**
 
 1. 检查工作区和当前分支：
 
 ```bash
-cd /home/johntime/hermes-qq-bridge
+    cd <BRIDGE_DIR>
 git status --short --branch
 git log --oneline -3
 ```
@@ -73,7 +73,7 @@ git switch -c feat/user-profile-relationship
 ```bash
 python3 - <<'PY'
 import sqlite3
-p='/home/johntime/.hermes/profiles/qq-group/state.db'
+    p='<HERMES_PROFILE_DIR>/qq-group/state.db'
 db=sqlite3.connect(p)
 for t in ('messages','sessions','gateway_routing'):
     print(t, db.execute(f'SELECT count(*) FROM {t}').fetchone()[0])
@@ -247,7 +247,7 @@ git commit -m "docs: define progressive disclosure profile layout"
 **Files:**
 - Create: `scripts/extract_profile_events.py`
 - Test: `tests/test_extract_profile_events.py`
-- Read-only: `/home/johntime/.hermes/profiles/qq-group/state.db`
+- Read-only: `<HERMES_PROFILE_DIR>/qq-group/state.db`
 
 **抽取原则：**
 
@@ -292,7 +292,7 @@ git commit -m "docs: define progressive disclosure profile layout"
 
 ```bash
 python scripts/extract_profile_events.py \
-  --state-db /home/johntime/.hermes/profiles/qq-group/state.db \
+  --state-db <HERMES_PROFILE_DIR>/qq-group/state.db \
   --since "2026-09-01T00:00:00+08:00" \
   --out /tmp/profile-events.jsonl
 pytest tests/test_extract_profile_events.py -q
@@ -437,7 +437,7 @@ git commit -m "feat: read minimal progressive relationship summaries"
 **Objective:** 让模型在明确呼叫或相似话题时获得少量关系背景，但不重写 SOUL。
 
 **Files:**
-- Modify: `/home/johntime/.hermes/profiles/qq-group/SOUL.md`（候选，不自动提交）
+- Modify: `<HERMES_PROFILE_DIR>/qq-group/SOUL.md`（候选，不自动提交）
 - Modify: 对应群 `config.yaml` override（候选，不自动提交）
 - Test: `tests/test_profile_prompt_budget.py`
 
